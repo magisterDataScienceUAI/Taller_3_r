@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Pregunta Nº1</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Lenguaje en R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="documentacion.html">Documentación</a>
+</li>
+<li>
+  <a href="pregunta1.html">Preguna 1</a>
+</li>
+<li>
+  <a href="pregunta2.html">Pregunta 2</a>
+</li>
+<li>
+  <a href="pregunta3.html">Pregunta 3</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Pregunta Nº1</h1>
+
+</div>
+
+
+<p><br />
+La pregunta <strong>Nº1</strong>, consiste en lo siguiente:<br />
+<br />
+</p>
+<p>
+Tabla con indicadores regionales del <strong>TALLER 1</strong> con un análisis de resultados.
+</p>
+<p>Nuestra tabla es la siguiente:</p>
+<table class=" lightable-paper lightable-striped" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+REG
+</th>
+<th style="text-align:right;">
+HAB
+</th>
+<th style="text-align:right;">
+DEF
+</th>
+<th style="text-align:right;">
+TASA_MORT
+</th>
+<th style="text-align:right;">
+TASA_MASC
+</th>
+<th style="text-align:right;">
+EDAD_PROM
+</th>
+<th style="text-align:left;">
+PASIST
+</th>
+<th style="text-align:left;">
+PDEFC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Región de Tarapacá
+</td>
+<td style="text-align:right;">
+342129
+</td>
+<td style="text-align:right;">
+1384
+</td>
+<td style="text-align:right;">
+4.045
+</td>
+<td style="text-align:right;">
+1166
+</td>
+<td style="text-align:right;font-weight: bold;">
+68.45
+</td>
+<td style="text-align:left;font-weight: bold;">
+44.36%
+</td>
+<td style="text-align:left;font-weight: bold;">
+23.27%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Antofagasta
+</td>
+<td style="text-align:right;">
+623851
+</td>
+<td style="text-align:right;">
+3104
+</td>
+<td style="text-align:right;">
+4.976
+</td>
+<td style="text-align:right;">
+1116
+</td>
+<td style="text-align:right;font-weight: bold;">
+67.84
+</td>
+<td style="text-align:left;font-weight: bold;">
+52.03%
+</td>
+<td style="text-align:left;font-weight: bold;">
+25.58%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Atacama
+</td>
+<td style="text-align:right;">
+304580
+</td>
+<td style="text-align:right;">
+1548
+</td>
+<td style="text-align:right;">
+5.082
+</td>
+<td style="text-align:right;">
+1297
+</td>
+<td style="text-align:right;font-weight: bold;">
+71.03
+</td>
+<td style="text-align:left;font-weight: bold;">
+48.26%
+</td>
+<td style="text-align:left;font-weight: bold;">
+22.42%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Coquimbo
+</td>
+<td style="text-align:right;">
+793049
+</td>
+<td style="text-align:right;">
+4397
+</td>
+<td style="text-align:right;">
+5.544
+</td>
+<td style="text-align:right;">
+1166
+</td>
+<td style="text-align:right;font-weight: bold;">
+72.28
+</td>
+<td style="text-align:left;font-weight: bold;">
+42.44%
+</td>
+<td style="text-align:left;font-weight: bold;">
+26.77%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Valparaíso
+</td>
+<td style="text-align:right;">
+1885948
+</td>
+<td style="text-align:right;">
+12582
+</td>
+<td style="text-align:right;">
+6.671
+</td>
+<td style="text-align:right;">
+1050
+</td>
+<td style="text-align:right;font-weight: bold;">
+73.53
+</td>
+<td style="text-align:left;font-weight: bold;">
+44.69%
+</td>
+<td style="text-align:left;font-weight: bold;">
+24.96%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de O’Higgins
+</td>
+<td style="text-align:right;">
+954279
+</td>
+<td style="text-align:right;">
+5440
+</td>
+<td style="text-align:right;">
+5.701
+</td>
+<td style="text-align:right;">
+1234
+</td>
+<td style="text-align:right;font-weight: bold;">
+71.45
+</td>
+<td style="text-align:left;font-weight: bold;">
+42.06%
+</td>
+<td style="text-align:left;font-weight: bold;">
+24.93%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Maule
+</td>
+<td style="text-align:right;">
+1092575
+</td>
+<td style="text-align:right;">
+6663
+</td>
+<td style="text-align:right;">
+6.098
+</td>
+<td style="text-align:right;">
+1185
+</td>
+<td style="text-align:right;font-weight: bold;">
+71.96
+</td>
+<td style="text-align:left;font-weight: bold;">
+45.64%
+</td>
+<td style="text-align:left;font-weight: bold;">
+25.47%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Biobío
+</td>
+<td style="text-align:right;">
+2136726
+</td>
+<td style="text-align:right;">
+13141
+</td>
+<td style="text-align:right;">
+6.150
+</td>
+<td style="text-align:right;">
+1154
+</td>
+<td style="text-align:right;font-weight: bold;">
+71.53
+</td>
+<td style="text-align:left;font-weight: bold;">
+49.16%
+</td>
+<td style="text-align:left;font-weight: bold;">
+25.93%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de La Araucanía
+</td>
+<td style="text-align:right;">
+994888
+</td>
+<td style="text-align:right;">
+6653
+</td>
+<td style="text-align:right;">
+6.687
+</td>
+<td style="text-align:right;">
+1169
+</td>
+<td style="text-align:right;font-weight: bold;">
+71.97
+</td>
+<td style="text-align:left;font-weight: bold;">
+44.19%
+</td>
+<td style="text-align:left;font-weight: bold;">
+23.75%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Los Lagos
+</td>
+<td style="text-align:right;">
+870227
+</td>
+<td style="text-align:right;">
+5426
+</td>
+<td style="text-align:right;">
+6.235
+</td>
+<td style="text-align:right;">
+1251
+</td>
+<td style="text-align:right;font-weight: bold;">
+70.50
+</td>
+<td style="text-align:left;font-weight: bold;">
+42.83%
+</td>
+<td style="text-align:left;font-weight: bold;">
+23.98%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Aysén
+</td>
+<td style="text-align:right;">
+105382
+</td>
+<td style="text-align:right;">
+525
+</td>
+<td style="text-align:right;">
+4.982
+</td>
+<td style="text-align:right;">
+1561
+</td>
+<td style="text-align:right;font-weight: bold;">
+69.02
+</td>
+<td style="text-align:left;font-weight: bold;">
+43.81%
+</td>
+<td style="text-align:left;font-weight: bold;">
+28%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Magallanes y Artántica Chilena
+</td>
+<td style="text-align:right;">
+171293
+</td>
+<td style="text-align:right;">
+1087
+</td>
+<td style="text-align:right;">
+6.346
+</td>
+<td style="text-align:right;">
+1183
+</td>
+<td style="text-align:right;font-weight: bold;">
+72.21
+</td>
+<td style="text-align:left;font-weight: bold;">
+53.27%
+</td>
+<td style="text-align:left;font-weight: bold;">
+27.05%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+Región de Metropolitana
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+7508690
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+40384
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+5.378
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+1015
+</td>
+<td style="text-align:right;font-weight: bold;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+72.17
+</td>
+<td style="text-align:left;font-weight: bold;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+40.68%
+</td>
+<td style="text-align:left;font-weight: bold;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+24.01%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Los Ríos
+</td>
+<td style="text-align:right;">
+398493
+</td>
+<td style="text-align:right;">
+2689
+</td>
+<td style="text-align:right;">
+6.748
+</td>
+<td style="text-align:right;">
+1208
+</td>
+<td style="text-align:right;font-weight: bold;">
+71.58
+</td>
+<td style="text-align:left;font-weight: bold;">
+42.84%
+</td>
+<td style="text-align:left;font-weight: bold;">
+23.28%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Arica y Parinacota
+</td>
+<td style="text-align:right;">
+237082
+</td>
+<td style="text-align:right;">
+1365
+</td>
+<td style="text-align:right;">
+5.758
+</td>
+<td style="text-align:right;">
+1160
+</td>
+<td style="text-align:right;font-weight: bold;">
+70.92
+</td>
+<td style="text-align:left;font-weight: bold;">
+43%
+</td>
+<td style="text-align:left;font-weight: bold;">
+25.27%
+</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+Ahora con esta información analizaremos La región Metropolitana respecto a las 03 regiones con mayor número de <strong>habitantes en Chile</strong>.</p>
+<br />
+
+<table class=" lightable-paper lightable-striped" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+REG
+</th>
+<th style="text-align:right;">
+HAB
+</th>
+<th style="text-align:right;">
+DEF
+</th>
+<th style="text-align:right;">
+TASA_MORT
+</th>
+<th style="text-align:right;">
+TASA_MASC
+</th>
+<th style="text-align:right;">
+EDAD_PROM
+</th>
+<th style="text-align:left;">
+PASIST
+</th>
+<th style="text-align:left;">
+PDEFC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+Región de Metropolitana
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+7508690
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+40384
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+5.378
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+1015
+</td>
+<td style="text-align:right;font-weight: bold;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+72.17
+</td>
+<td style="text-align:left;font-weight: bold;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+40.68%
+</td>
+<td style="text-align:left;font-weight: bold;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+24.01%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Biobío
+</td>
+<td style="text-align:right;">
+2136726
+</td>
+<td style="text-align:right;">
+13141
+</td>
+<td style="text-align:right;">
+6.150
+</td>
+<td style="text-align:right;">
+1154
+</td>
+<td style="text-align:right;font-weight: bold;">
+71.53
+</td>
+<td style="text-align:left;font-weight: bold;">
+49.16%
+</td>
+<td style="text-align:left;font-weight: bold;">
+25.93%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Región de Valparaíso
+</td>
+<td style="text-align:right;">
+1885948
+</td>
+<td style="text-align:right;">
+12582
+</td>
+<td style="text-align:right;">
+6.671
+</td>
+<td style="text-align:right;">
+1050
+</td>
+<td style="text-align:right;font-weight: bold;">
+73.53
+</td>
+<td style="text-align:left;font-weight: bold;">
+44.69%
+</td>
+<td style="text-align:left;font-weight: bold;">
+24.96%
+</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+Con respecto a la <strong>Región Metropolitana</strong>.<br />
+</p>
+<ol style="list-style-type: decimal">
+<li>Su tasa de <strong>mortalidad</strong> es inferior al resto con sólo: <strong>5.378</strong></li>
+<li>En La tasa de masculinindad ocurre algo similar, teniendo un valor de: <strong>1015</strong></li>
+<li>La región metropolitana es en porcentaje <strong>398.14</strong> % más grande que la tercera región con mayor número de habitantes.</li>
+</ol>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

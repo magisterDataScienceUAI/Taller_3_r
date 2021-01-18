@@ -1,0 +1,201 @@
+---
+title: "Pregunta Nº3"
+output:
+  html_document:
+    theme: united
+    highlight: tango
+    runtime: shiny
+---
+
+La pregunta **Nº3**, consiste en lo siguiente:
+
+Elija una región y obtenga 3 indicadores nuevos con los
+datos calculados, y comente los resultados
+\
+\
+Se escoguieron las variables relacionadas con el nivel de estudio de las personas y también el número de cesantes y personas con trabajo.
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+library(readxl)
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(rmdformats)
+library(kableExtra)
+library(DT)
+library(shinydashboard)
+library(shiny)
+selected_var="Región de Tarapacá"
+
+
+```
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+
+
+ui <-   basicPage(
+  h3("Seleccione una región:"),
+  selectInput("regiones", "Regiones de Chile", c("Región de Tarapacá","Región de Antofagasta","Región de Atacama","Región de Coquimbo","Región de Valparaíso","Región de O’Higgins","Región de Maule","Región de Biobío","Región de La Araucanía","Región de Los Lagos","Región de Aysén","Región de Magallanes y Artántica Chilena","Región de Metropolitana","Región de Los Ríos","Región de Arica y Parinacota")),
+  textOutput("selected_var")
+  
+)
+
+region=1
+
+server <- function(input,output, session) {
+  output$selected_var <- renderText({
+    paste("Haz seleccionado", input$regiones)
+  
+  })
+  if(!is.null(selected_var)){
+    region=selected_var
+    
+  }
+  
+  
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+
+
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+
+#Acá puede realizar el cambio de la región por la que UD desee
+
+
+knitr::opts_chunk$set(echo = TRUE)
+setwd("/Users/king/Documents/R/Taller 3")
+DEF_2017 = read.csv("DEF_2017.csv", sep=";")
+PROY = read_excel("Proyeccion Chile.xlsx")
+
+
+TF =  PROY %>%
+  filter(División == 'Total') %>%   
+  left_join(                        
+    DEF_2017 %>%
+      mutate( hom = (SEXO==1)*1, 
+              muj = (SEXO==2)*1, 
+              edad = ifelse(EDAD_TIPO>=2,0,ifelse(EDAD_CANT==999,NA,EDAD_CANT)),
+              asist = (LOCAL_DEF==1)*100,
+              cesa = ifelse(ACTIV == 2,1,0),
+              activo = ifelse(ACTIV == 1,1,0),
+              profes = ifelse(NIVEL_INS == 1,1,0),
+              medio = ifelse(NIVEL_INS == 2,1,0),
+              prof_activo = ifelse(ACTIV == 1,ifelse(NIVEL_INS ==1,1,0),0),
+              medio_activo = ifelse(ACTIV == 1,ifelse(NIVEL_INS ==2,1,0),0),
+              sec_activo = ifelse(ACTIV == 1,ifelse(NIVEL_INS ==3,1,0),0),
+              letra = (substr(DIAG1, 1,1)=='C')*100) %>% 
+      group_by(REG_RES) %>% 
+      summarise(
+        DEF = n(),
+        TASA_MASC = round(sum(hom)/sum(muj)*1000,0),
+        CESAN = sum(cesa),
+        ACTIVO = sum(activo),
+        PROFESIONAL =sum(profes),
+        MEDIA = sum(medio),
+        PRO_ACT = sum(prof_activo),
+        MED_ACT = sum(medio_activo),
+        SEC_ACT = sum(sec_activo),
+        EDAD_PROM = round(mean(edad, na.rm=TRUE),2),
+        PASIST = paste(round(mean(asist, na.rm=TRUE),2),"%",sep=""),
+        PDEFC = paste(round(mean(letra, na.rm=TRUE),2),"%",sep=""))
+       
+    ,by=c('ID_Region' = 'REG_RES')) %>% 
+  mutate( TASA_MORT = round((DEF/`2017`)*1000,3),
+          REG = paste('Región de',Region)) %>% 
+  arrange(ID_Region) %>% 
+  select(REG,HAB='2017',DEF,TASA_MORT,TASA_MASC,EDAD_PROM,PASIST,PDEFC,CESAN,ACTIVO,PROFESIONAL,MEDIA,PRO_ACT,MED_ACT,SEC_ACT) 
+
+# Transformar el número de la región a palabras
+if (region==1){
+  region="Región de Tarapacá"
+}
+if (region==2){
+  region="Región de Antofagasta"
+}
+if (region==3){
+  region="Región de Atacama"
+}
+if (region==4){
+  region="Región de Coquimbo"
+}
+if (region==5){
+  region="Región de Valparaíso"
+}
+if (region==6){
+  region="Región de O’Higgins"
+}
+if (region==7){
+  region="Región de Maule"
+}
+if (region==8){
+  region="Región de Biobío"
+}
+if (region==9){
+  region="Región de La Araucanía"
+}
+if (region==10){
+  region="Región de Los Lagos"
+}
+if (region==11){
+  region="Región de Aysén"
+}
+if (region==12){
+  region="Región de Magallanes y Artántica Chilena"
+}
+if (region==13){
+  region="Región de Metropolitana"
+}
+if (region==14){
+  region="Región de Los Ríos"
+}
+if (region==15){
+  region="Región de Arica y Parinacota"
+}
+#FIN Transformar el número de la región a palabras
+
+
+#Ahora solamente ocupamos la región a estudiar
+TF =  TF[TF$REG==region,]
+# DT::datatable(TF)
+
+# La tabla a mostrar
+kbl(TF) %>%
+  kable_paper("striped", full_width = T) %>%
+  column_spec(2:3, bold = T) %>%
+  row_spec(1:1, bold = T, color = "white", background = "#D7261E")
+
+# FIn de la tabla
+
+# Calculamos cuanto es el % de las personas cesantes en comparación con el total de personas activas al momento de fallecer
+porcentaje_activo=TF$ACTIVO*100/TF$DEF
+porcentaje_activo=round(porcentaje_activo,2)
+porcentaje_pasivo=TF$CESAN*100/TF$DEF
+porcentaje_pasivo=round(porcentaje_pasivo,2)
+
+porcentaje_cesan_activo = porcentaje_pasivo - porcentaje_activo
+
+
+porcentaje_prof=TF$PROFESIONAL*100/TF$DEF
+porcentaje_prof=round(porcentaje_prof,2)
+# FIN Calculamos cuanto es el % de las personas cesantes en comparación con el total de personas activas al momento de fallecer
+
+#Ahora calcularemos el porcentaje de los profesionales
+
+porcentaje_profesionales=TF$PROFESIONAL*100/TF$DEF
+porcentaje_profesionales=round(porcentaje_profesionales,2)
+
+# Fin profesionales
+```
+
+**Podemos concluir lo siguiente:**
+
+\
+
+1. El porcentaje de fallecidos cesantes de la **`r region `** en comparación con las personas que tenían trabajo es: **`r porcentaje_cesan_activo`**
+2. El porcentaje de fallecidos profesionales de la **`r region `** en comparación al total de Defunciones: **`r porcentaje_profesionales`**

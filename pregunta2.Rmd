@@ -1,0 +1,85 @@
+---
+title: "Pregunta Nº2"
+output:
+  html_document:
+    theme: united
+    highlight: tango
+---
+
+La pregunta **Nº2**, consiste en lo siguiente:
+
+ Tabla con proyección 2018 a 2025 del **TALLER 2** con un análisis de resultados.
+ 
+ 
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(readr)
+library(readxl)
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(knitr)
+library(rmdformats)
+library(kableExtra)
+library(DT)
+```
+\
+**Nuestra tabla es la siguiente:**
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("/Users/king/Documents/Taller_3_r")
+DEF_2017 = read.csv("DEF_2017.csv", sep=";")
+PROY = read_excel("Proyeccion Chile.xlsx")
+
+TF =  PROY %>%
+  filter(División == 'Total') %>%   
+  left_join(                        
+    DEF_2017 %>%
+      mutate( hom = (SEXO==1)*1, 
+              muj = (SEXO==2)*1, 
+              edad = ifelse(EDAD_TIPO>=2,0,ifelse(EDAD_CANT==999,NA,EDAD_CANT)),
+              asist = (LOCAL_DEF==1)*100,
+              letra = (substr(DIAG1, 1,1)=='C')*100) %>% 
+      group_by(REG_RES) %>% 
+      summarise(
+        DEF = n(),
+        TASA_MASC = round(sum(hom)/sum(muj)*1000,0),
+        EDAD_PROM = round(mean(edad, na.rm=TRUE),2),
+        PASIST = paste(round(mean(asist, na.rm=TRUE),2),"%",sep=""),
+        PDEFC = paste(round(mean(letra, na.rm=TRUE),2),"%",sep="")) 
+    ,by=c('ID_Region' = 'REG_RES')) %>% 
+  mutate( TASA_MORT = round((DEF/`2017`)*1000,3),
+          REG = paste('Región de',Region)) %>% 
+  arrange(ID_Region) %>% 
+  select(REG,HAB='2017',DEF,TASA_MORT,TASA_MASC,EDAD_PROM,PASIST,PDEFC)
+
+tasa_nacional = sum(TF$DEF)/sum(TF$HAB)
+
+
+T2 = PROY %>% 
+        dplyr::filter(División =="Total") %>% 
+        dplyr::select("ID_Region","Region","División",'2018':'2025') %>% 
+        tidyr::gather('2018':'2025', key = "Año",value="HAB") %>% 
+        dplyr::group_by(Año) %>% 
+        dplyr::summarise(Pob = sum(HAB)) %>% 
+        dplyr::mutate(Def_estimado = Pob*tasa_nacional) 
+
+
+
+datatable(
+  T2, extensions = 'Buttons', options = list(
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+  )
+)
+
+# kbl(T2) %>%
+#   kable_paper("striped", full_width = T) %>%
+#   column_spec(2:3, bold = T) %>%
+#   row_spec(4:4, bold = T, color = "white", background = "#D7261E")
+
+desviacion_standar=round(sd(x=T2$Def_estimado),1)
+
+```
+
+Podemos decir que la **desviación estandar, respecto al número de defunsiones estimadas** de la Población de los años 2018 al 2025 es  : **`r desviacion_standar`**

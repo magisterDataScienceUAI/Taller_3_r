@@ -1,0 +1,13 @@
+name: "lenguaje en R"
+output_dir: "."
+navbar:
+  title: "Lenguaje en R"
+  left:
+    - text: "Documentación"
+      href: documentacion.html
+    - text: "Preguna 1"
+      href: pregunta1.html
+    - text: "Pregunta 2"
+      href: pregunta2.html
+    - text: "Pregunta 3"
+      href: pregunta3.html  

@@ -1,0 +1,11 @@
+---
+title: "Bienvenidos"
+output:
+  html_document:
+    theme: united
+    highlight: tango
+---
+
+En este sitio podrá revisar el taller número 3 correspondiente al curso  Lenguaje en R.
+
+Para acceder de manera rápida al resultado le sugerimos pinchar el tabs correspondiente.
